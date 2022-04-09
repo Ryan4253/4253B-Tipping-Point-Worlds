@@ -1,32 +1,33 @@
 #include "main.h"
 using namespace ryan;
 
-// CONTROLLER
+// CONTROLLERS
 Controller master(ControllerId::master);
 Controller parter(ControllerId::partner);
 
-// MOTOR
-Motor leftFront(0);
-Motor leftBack(0);
-Motor rightFront(0);
-Motor rightBack(0);
-Motor liftTop(0);
-Motor liftBottom(0);
+// MOTORS
+Motor leftFront(3);
+Motor leftBack(2);
+Motor rightFront(17);
+Motor rightBack(20);
+Motor liftTop(4);
+Motor liftBottom(0); // todo - check bottom lift port
 
 MotorGroup leftDrive({leftFront, leftBack});
 MotorGroup rightDrive({rightFront, rightBack});
 MotorGroup lift({liftTop, liftBottom});
-Motor roller(0);
-Motor topBranch(0);
+Motor roller(10);
+Motor topBranch(0); // todo - check motor port
 
-// SENSOR
-RotationSensor left(0);
-RotationSensor right(0);
-RotationSensor mid(0);
-IMU imu(0);
+// SENSORS
+RotationSensor leftEncoder(1);
+RotationSensor rightEncoder(18);
+RotationSensor midEncoder(0); // check port
+IMU imu(6);
 pros::Vision vision(0);
 
 // PNEUMATICS
+// TODO - check wiring
 Pneumatics clamp('A', true);
 Pneumatics backClamp('B');
 Pneumatics tilter('C', true);
@@ -35,8 +36,15 @@ Pneumatics needle('D');
 // MOTION PROFILE CONSTANTS
 
 
-// SUBSYSTEM CONTROLLER
-std::shared_ptr<OdomChassisController> chassis;
+// SUBSYSTEM CONTROLLERS
+auto chassis = ChassisControllerBuilder()
+	.withMotors(leftDrive, rightDrive)
+    // todo - check gear ratio
+	.withDimensions({AbstractMotor::gearset::green, 5.0/3.0}, {{3.25_in, 1.294_ft}, imev5GreenTPR})
+    .withSensors(leftEncoder, rightEncoder, midEncoder)
+    // todo - check tracking wheel track
+    .withOdometry({{2.75_in, 7_in}, 360}, StateMode::FRAME_TRANSFORMATION)
+	.build();
 std::shared_ptr<AsyncMotionProfiler> profiler;
 std::shared_ptr<AsyncMotionProfiler> turnProfiler;
 extern std::shared_ptr<AsyncPositionController<double, double>> liftController;
