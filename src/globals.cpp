@@ -1,11 +1,11 @@
 #include "main.h"
 using namespace ryan;
 
-// CONTROLLER
+// CONTROLLERS
 Controller master(ControllerId::master);
 Controller parter(ControllerId::partner);
 
-// MOTOR
+// MOTORS
 Motor leftFront(3, false, AbstractMotor::gearset::green, AbstractMotor::encoderUnits::degrees); // TODO CHECK REVERSE
 Motor leftBack(2, false, AbstractMotor::gearset::green, AbstractMotor::encoderUnits::degrees); // TODO CHECK REVERSE
 Motor rightFront(17, false, AbstractMotor::gearset::green, AbstractMotor::encoderUnits::degrees); // TODO CHECK REVERSE
@@ -19,7 +19,7 @@ MotorGroup leftDrive({leftFront, leftBack});
 MotorGroup rightDrive({rightFront, rightBack});
 MotorGroup lift({liftTop, liftBottom});
 
-// SENSOR
+// SENSORS
 RotationSensor left(1); // TODO CHECK REVERSE
 RotationSensor right(18); // TODO CHECK REVERSE
 RotationSensor mid(0); // TODO CHANGE PORT, CHECK REVERSE
@@ -38,7 +38,7 @@ ProfileConstraint turnLimit({4.8_ftps, 17.5_ftps2, 17.5_ftps2, 25_ftps3}); // TO
 FFVelocityController leftController(0.187, 0.04, 0.025, 2.5, 0); // TODO TUNE GAINS
 FFVelocityController rightController(0.187, 0.04, 0.025, 2.5, 0); // TODO TUNE GAINS
 
-// SUBSYSTEM CONTROLLER
+// SUBSYSTEM CONTROLLERS
 std::shared_ptr<OdomChassisController> chassis = ChassisControllerBuilder()
     .withMotors(leftDrive, rightDrive)
     .withDimensions({AbstractMotor::gearset::green, 5.0/7.0}, {{3.25_in, 1.294_ft}, imev5BlueTPR}) // TODO CALCULATE CORRECT TRACK WIDTH
