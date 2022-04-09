@@ -77,8 +77,9 @@ void opcontrol(void);
  */
 #include <iostream>
 #include "ryanlib/api.hpp"
-#include "globals.hpp"
+#include "gif-pros/gifclass.hpp"
 #include "display/lvgl.h"
+#include "globals.hpp"
 #endif
 
 #endif  // _PROS_MAIN_H_

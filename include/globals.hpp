@@ -6,9 +6,20 @@
 
 // CONSTANTS
 const double DEADBAND = 0.0500;
-const int MAX_LIFT_HEIGHT = 750; 
-const int LIFT_STEP = 11; 
 
+namespace LiftPosition{
+    const int MINHEIGHT = 0;
+    const int LOWBRANCH = 0; // TODO TUNE READING
+    const int TOPBRANCH = 0; // TODO TUNE READING
+    const int MAXHEIGHT = 750;
+};
+
+namespace TopBranchPosition{
+    const int REST = 0; // TODO TUNE READING
+    const int LOADING = 0; // TODO TUNE READING
+    const int LOWBRANCH = 0; // TODO TUNE READING
+    const int TOPBRANCH = 0; // TODO TUNE READING   
+}
 // CONTROLLER
 extern Controller master;
 extern Controller partner;
@@ -34,12 +45,10 @@ extern Pneumatics tilter;
 extern Pneumatics needle;
 
 // MOTION PROFILE CONSTANTS
-extern ProfileConstraint constraint;
-extern ProfileConstraint trapLimit;
-extern FFVelocityController leftLinear;
-extern FFVelocityController rightLinear;
-extern FFVelocityController leftTrajectory;
-extern FFVelocityController rightTrajectory;
+extern ProfileConstraint moveLimit;
+extern ProfileConstraint turnLimit;
+extern FFVelocityController leftController;
+extern FFVelocityController rightController;
 
 // SUBSYSTEM CONTROLLERS
 extern std::shared_ptr<OdomChassisController> chassis;

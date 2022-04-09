@@ -114,14 +114,6 @@ class AsyncMotionProfiler : public StateMachine<MotionProfileState, MotionProfil
      */ 
     void setTarget(okapi::QAngle iAngle, TurnType iType = TurnType::GLOBAL, bool waitUntilSettled = false);
 
-    void logLeftVelocity(bool flag);
-
-    void logRightVelocity(bool flag);
-
-    void logLeftPosition(bool flag);
-
-    void logRightPosition(bool flag);
-
     /**
      * @brief stop the chassis from moving
      * 
