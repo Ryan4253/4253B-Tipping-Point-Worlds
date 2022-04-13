@@ -36,7 +36,7 @@ extern RotationSensor left;
 extern RotationSensor right;
 extern RotationSensor mid;
 extern IMU imu; 
-extern pros::Vision vision_sensor;
+extern pros::Vision vision;
 
 // PNEUMATICS
 extern Pneumatics clamp;
