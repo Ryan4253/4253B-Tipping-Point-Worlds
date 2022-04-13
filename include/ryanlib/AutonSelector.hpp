@@ -13,7 +13,9 @@ class Singleton{
     Singleton& operator=(Singleton&&) = delete;
 
     static T& getInstance(){
-        static T instance;
+        if(instance == nullptr){
+            instance = new T_Instance();
+        }
         return instance;
     }
 
@@ -59,9 +61,4 @@ class AutonSelector : public Singleton<AutonSelector>{
     std::map<std::string, std::function<void()>> auton;
 };
 
-void test(){
-    auto& a = AutonSelector::getInstance();
-    a.getCandidateAuton();
 }
-
-};
