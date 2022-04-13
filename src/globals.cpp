@@ -27,10 +27,11 @@ IMU imu(6);
 pros::Vision vision(0); // TODO CHANGE PORT
 
 // PNEUMATICS
-Pneumatics clamp('A', true); // TODO CHANGE PORT, CHECK REVERSE
-Pneumatics backClamp('B'); // TODO CHANGE PORT, CHECK REVERSE
-Pneumatics tilter('C', true); // TODO CHANGE PORT, CHECK REVERSE
-Pneumatics needle('D'); // TODO CHANGE PORT, CHECK REVERSE
+Pneumatics clamp('A', true); // TODO CHANGE PORT
+Pneumatics backClamp('B'); // TODO CHANGE PORT
+Pneumatics tilter('C', true); // TODO CHANGE PORT
+Pneumatics leftNeedle('D'); // TODO CHANGE PORT
+Pneumatics rightNeedle('E'); // TODO CHANGE PORT
 
 // MOTION PROFILE CONSTANTS
 ProfileConstraint moveLimit({4.8_ftps, 17.5_ftps2, 17.5_ftps2, 25_ftps3}); // TODO TUNE GAINS
