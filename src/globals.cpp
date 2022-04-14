@@ -11,9 +11,9 @@ Motor leftBack(2, true, AbstractMotor::gearset::green, AbstractMotor::encoderUni
 Motor rightFront(17, false, AbstractMotor::gearset::green, AbstractMotor::encoderUnits::degrees); 
 Motor rightBack(20, false, AbstractMotor::gearset::green, AbstractMotor::encoderUnits::degrees); 
 Motor liftTop(4, true, AbstractMotor::gearset::green, AbstractMotor::encoderUnits::degrees); 
-Motor liftBottom(5, true, AbstractMotor::gearset::green, AbstractMotor::encoderUnits::degrees);
+Motor liftBottom(6, true, AbstractMotor::gearset::green, AbstractMotor::encoderUnits::degrees);
 Motor roller(10, false, AbstractMotor::gearset::blue, AbstractMotor::encoderUnits::degrees); 
-Motor topBranch(21, false, AbstractMotor::gearset::red, AbstractMotor::encoderUnits::degrees); 
+Motor topBranch(15, false, AbstractMotor::gearset::red, AbstractMotor::encoderUnits::degrees); 
 
 MotorGroup leftDrive({leftFront, leftBack});
 MotorGroup rightDrive({rightFront, rightBack});
@@ -22,8 +22,8 @@ MotorGroup lift({liftTop, liftBottom});
 // SENSORS
 RotationSensor left(1, true); // todo check port
 RotationSensor right(18); 
-RotationSensor mid(8);
-IMU imu(6);
+RotationSensor mid(9);
+IMU imu(8);
 pros::Vision vision(16); 
 
 // PNEUMATICS
