@@ -6,32 +6,32 @@ Controller master(ControllerId::master);
 Controller parter(ControllerId::partner);
 
 // MOTORS
-Motor leftFront(3, false, AbstractMotor::gearset::green, AbstractMotor::encoderUnits::degrees); // TODO CHECK REVERSE
-Motor leftBack(2, false, AbstractMotor::gearset::green, AbstractMotor::encoderUnits::degrees); // TODO CHECK REVERSE
-Motor rightFront(17, false, AbstractMotor::gearset::green, AbstractMotor::encoderUnits::degrees); // TODO CHECK REVERSE
-Motor rightBack(20, false, AbstractMotor::gearset::green, AbstractMotor::encoderUnits::degrees); // TODO CHECK REVERSE
-Motor liftTop(4, false, AbstractMotor::gearset::green, AbstractMotor::encoderUnits::degrees); // TODO CHECK REVERSE
-Motor liftBottom(0, false, AbstractMotor::gearset::green, AbstractMotor::encoderUnits::degrees); // TODO CHANGE PORT, CHECK REVERSE
-Motor roller(10, false, AbstractMotor::gearset::blue, AbstractMotor::encoderUnits::degrees); // TODO CHECK REVERSE
-Motor topBranch(0, false, AbstractMotor::gearset::red, AbstractMotor::encoderUnits::degrees); // TODO CHANGE PORT, CHECK REVERSE
+Motor leftFront(3, true, AbstractMotor::gearset::green, AbstractMotor::encoderUnits::degrees); 
+Motor leftBack(2, true, AbstractMotor::gearset::green, AbstractMotor::encoderUnits::degrees); 
+Motor rightFront(17, false, AbstractMotor::gearset::green, AbstractMotor::encoderUnits::degrees); 
+Motor rightBack(20, false, AbstractMotor::gearset::green, AbstractMotor::encoderUnits::degrees); 
+Motor liftTop(4, true, AbstractMotor::gearset::green, AbstractMotor::encoderUnits::degrees); 
+Motor liftBottom(5, true, AbstractMotor::gearset::green, AbstractMotor::encoderUnits::degrees);
+Motor roller(10, false, AbstractMotor::gearset::blue, AbstractMotor::encoderUnits::degrees); 
+Motor topBranch(21, false, AbstractMotor::gearset::red, AbstractMotor::encoderUnits::degrees); 
 
 MotorGroup leftDrive({leftFront, leftBack});
 MotorGroup rightDrive({rightFront, rightBack});
 MotorGroup lift({liftTop, liftBottom});
 
 // SENSORS
-RotationSensor left(1); // TODO CHECK REVERSE
-RotationSensor right(18); // TODO CHECK REVERSE
-RotationSensor mid(0); // TODO CHANGE PORT, CHECK REVERSE
+RotationSensor left(1, true); // todo check port
+RotationSensor right(18); 
+RotationSensor mid(8);
 IMU imu(6);
-pros::Vision vision(0); // TODO CHANGE PORT
+pros::Vision vision(16); 
 
 // PNEUMATICS
-Pneumatics clamp('A', true); // TODO CHANGE PORT
-Pneumatics backClamp('B'); // TODO CHANGE PORT
-Pneumatics tilter('C', true); // TODO CHANGE PORT
-Pneumatics leftNeedle('D'); // TODO CHANGE PORT
-Pneumatics rightNeedle('E'); // TODO CHANGE PORT
+Pneumatics clamp('F'); 
+Pneumatics backClamp('C'); 
+Pneumatics tilter('E', true); 
+Pneumatics leftNeedle('H'); 
+Pneumatics rightNeedle('G'); 
 
 // MOTION PROFILE CONSTANTS
 ProfileConstraint moveLimit({4.8_ftps, 17.5_ftps2, 17.5_ftps2, 25_ftps3}); // TODO TUNE GAINS

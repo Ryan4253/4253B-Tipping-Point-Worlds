@@ -50,6 +50,26 @@ void opcontrol(){
 		lift.moveVoltage(12000*(master.getDigital(ControllerDigital::L1) - master.getDigital(ControllerDigital::L2)));
 
         /**
+         * @brief Manual swinger control
+         *        UP pressed: moves up
+         *        DOWN pressed: moves down 
+         */
+        topBranch.moveVoltage(12000 * (master.getDigital(ControllerDigital::up) - master.getDigital(ControllerDigital::down)));
+
+        /**
+         * @brief Needle control
+         *        LEFT pressed: moves left
+         *        RIGHT pressed: moves right
+         * 
+         */
+        if(master[ControllerDigital::left].changedToPressed()) {
+            leftNeedle.toggle();
+        }
+        if(master[ControllerDigital::right].changedToPressed()) {
+            rightNeedle.toggle();
+        }
+
+        /**
          * @brief controls the claw depending on the button value 
          *        When R1 is pressed: claw solenoid is set to true
          *        When R2 is unpressed: claw solenoid is set to false
