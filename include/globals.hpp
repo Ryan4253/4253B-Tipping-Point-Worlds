@@ -42,7 +42,8 @@ extern pros::Vision vision;
 extern Pneumatics clamp;
 extern Pneumatics backClamp;
 extern Pneumatics tilter;
-extern Pneumatics needle;
+extern Pneumatics leftNeedle;
+extern Pneumatics rightNeedle;
 
 // MOTION PROFILE CONSTANTS
 extern ProfileConstraint moveLimit;

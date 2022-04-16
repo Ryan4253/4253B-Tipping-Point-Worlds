@@ -11,7 +11,7 @@ void initialize() {
 	// imu initialization
 	pros::lcd::set_text(2, "imu calibrating..............");
 	imu.calibrate();
-	pros::delay(3000);
+	pros::delay(2000);
 	pros::lcd::set_text(2, "imu calibrated");
 }
 
@@ -25,6 +25,7 @@ void opcontrol(){
 	// sets brake mode
 	leftDrive.setBrakeMode(AbstractMotor::brakeMode::coast);
 	rightDrive.setBrakeMode(AbstractMotor::brakeMode::coast);
+    lift.setBrakeMode(AbstractMotor::brakeMode::hold);
 
 	// initializes subsystems
 	auto model = std::static_pointer_cast<ExpandedSkidSteerModel>(chassis->getModel());
@@ -47,7 +48,27 @@ void opcontrol(){
          *        L2 pressed: decrements target angle by LIFT_STEP
          *        note: target angle is capped to [0, MAX_LIFT_HEIGHT] to protect the lift
          */
-		lift.moveVoltage(12000*(master.getDigital(ControllerDigital::L1) - master.getDigital(ControllerDigital::L2)));
+		lift.moveVelocity(200*(master.getDigital(ControllerDigital::L1) - master.getDigital(ControllerDigital::L2)));
+
+        /**
+         * @brief Manual swinger control
+         *        UP pressed: moves up
+         *        DOWN pressed: moves down 
+         */
+        topBranch.moveVoltage(12000 * (master.getDigital(ControllerDigital::up) - master.getDigital(ControllerDigital::down)));
+
+        /**
+         * @brief Needle control
+         *        LEFT pressed: moves left
+         *        RIGHT pressed: moves right
+         * 
+         */
+        if(master[ControllerDigital::left].changedToPressed()) {
+            leftNeedle.toggle();
+        }
+        if(master[ControllerDigital::right].changedToPressed()) {
+            rightNeedle.toggle();
+        }
 
         /**
          * @brief controls the claw depending on the button value 
