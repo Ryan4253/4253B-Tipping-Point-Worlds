@@ -27,7 +27,7 @@ IMU imu(8);
 pros::Vision vision(16); 
 
 // PNEUMATICS
-Pneumatics clamp('F'); 
+Pneumatics clamp('F', true); 
 Pneumatics backClamp('C'); 
 Pneumatics tilter('E', true); 
 Pneumatics leftNeedle('H'); 
