@@ -13,6 +13,9 @@ void initialize() {
 	imu.calibrate();
 	pros::delay(2000);
 	pros::lcd::set_text(2, "imu calibrated");
+
+    topBranch.tarePosition();
+    topBranchController->tarePosition();
 }
 
 void disabled() {}
@@ -30,7 +33,7 @@ void opcontrol(){
 	// initializes subsystems
 	auto model = std::static_pointer_cast<ExpandedSkidSteerModel>(chassis->getModel());
 	liftController->flipDisable(true);
-	topBranchController->flipDisable(true);
+	// topBranchController->flipDisable(true);
 
 	// initializes constants
 	bool rollerState = false;
@@ -38,6 +41,8 @@ void opcontrol(){
 	// initializes gif
 	createBlankBackground();
 	auto gif = std::make_unique<Gif>("/usd/gif/crab-rave.gif", lv_scr_act());
+
+    auto swingerState = ControllerDigital::down;
 
 	while(true){
 		model->curvature(master.getAnalog(ControllerAnalog::leftY), master.getAnalog(ControllerAnalog::rightX), 0.05);
@@ -55,7 +60,12 @@ void opcontrol(){
          *        UP pressed: moves up
          *        DOWN pressed: moves down 
          */
-        topBranch.moveVoltage(12000 * (master.getDigital(ControllerDigital::up) - master.getDigital(ControllerDigital::down)));
+        // topBranch.moveVoltage(12000 * (master.getDigital(ControllerDigital::up) - master.getDigital(ControllerDigital::down)));
+        if(master.getDigital(ControllerDigital::up)) {
+            topBranchController->setTarget(590);
+        } else if (master.getDigital(ControllerDigital::down)) {
+            topBranchController->setTarget(0);
+        }
 
         /**
          * @brief Needle control
@@ -75,7 +85,7 @@ void opcontrol(){
          *        When R1 is pressed: claw solenoid is set to true
          *        When R2 is unpressed: claw solenoid is set to false
          */
-        clamp.set(master.getDigital(ControllerDigital::R1));
+        clamp.set(!master.getDigital(ControllerDigital::R1));
 
 		/**
          * @brief controls the claw depending on the button value 

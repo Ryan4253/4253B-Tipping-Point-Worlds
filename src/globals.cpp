@@ -27,7 +27,7 @@ IMU imu(8);
 pros::Vision vision(16); 
 
 // PNEUMATICS
-Pneumatics clamp('F', true); 
+Pneumatics clamp('F'); 
 Pneumatics backClamp('C'); 
 Pneumatics tilter('E', true); 
 Pneumatics leftNeedle('H'); 
@@ -64,7 +64,7 @@ std::shared_ptr<AsyncPositionController<double, double>> liftController = AsyncP
 
 std::shared_ptr<AsyncPositionController<double, double>> topBranchController = AsyncPosControllerBuilder()
     .withMotor(topBranch)
-    .withGains({0.007, 0.0, 0.000075}) // TODO TUNE GAINS
+    .withGains({0.007, 0.0, 0.000075}) // TODO TUNE GAINS 0.000075
     .build();
 
 void createBlankBackground(){
