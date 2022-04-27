@@ -14,8 +14,10 @@ void initialize() {
 	pros::delay(2000);
 	pros::lcd::set_text(2, "imu calibrated");
 
-    topBranch.tarePosition();
-    topBranchController->tarePosition();
+    // topBranchSensor.reset();
+    // topBranch.tarePosition();
+    // topBranchController->tarePosition();
+    // topBranchController->setMaxVelocity(0.5);
 }
 
 void disabled() {}
@@ -60,9 +62,10 @@ void opcontrol(){
          *        UP pressed: moves up
          *        DOWN pressed: moves down 
          */
-        // topBranch.moveVoltage(12000 * (master.getDigital(ControllerDigital::up) - master.getDigital(ControllerDigital::down)));
+        // topBranch.moveVoltage(10000 * (master.getDigital(ControllerDigital::up) - master.getDigital(ControllerDigital::down)));
         if(master.getDigital(ControllerDigital::up)) {
-            topBranchController->setTarget(590);
+            // topBranchController->setTarget(570);
+            topBranchController->setTarget(190);
         } else if (master.getDigital(ControllerDigital::down)) {
             topBranchController->setTarget(0);
         }

@@ -35,6 +35,7 @@ extern Motor roller;
 extern RotationSensor left;
 extern RotationSensor right;
 extern RotationSensor mid;
+extern RotationSensor topBranchSensor;
 extern IMU imu; 
 extern pros::Vision vision;
 

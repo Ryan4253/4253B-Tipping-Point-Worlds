@@ -23,13 +23,14 @@ MotorGroup lift({liftTop, liftBottom});
 RotationSensor left(1, true); // todo check port
 RotationSensor right(18); 
 RotationSensor mid(9);
+RotationSensor topBranchSensor(14, true);
 IMU imu(8);
 pros::Vision vision(16); 
 
 // PNEUMATICS
 Pneumatics clamp('F'); 
 Pneumatics backClamp('C'); 
-Pneumatics tilter('E', true); 
+Pneumatics tilter('E'); 
 Pneumatics leftNeedle('H'); 
 Pneumatics rightNeedle('G'); 
 
@@ -59,12 +60,17 @@ std::shared_ptr<AsyncMotionProfiler> turnProfiler = AsyncMotionProfilerBuilder()
 
 std::shared_ptr<AsyncPositionController<double, double>> liftController = AsyncPosControllerBuilder()
     .withMotor(lift)
+    // .withGearset({AbstractMotor::gearset::green, 7.0/1.0})
     .withGains({0.007, 0.0, 0.000075}) // TODO TUNE GAINS
     .build();
 
 std::shared_ptr<AsyncPositionController<double, double>> topBranchController = AsyncPosControllerBuilder()
     .withMotor(topBranch)
-    .withGains({0.007, 0.0, 0.000075}) // TODO TUNE GAINS 0.000075
+    // .withGearset({AbstractMotor::gearset::red, 3.0/1.0})
+    .withMaxVelocity(50)
+    // .withSensor(std::make_shared<RotationSensor>(topBranchSensor))
+    .withGains({0.0069, 0.0, 0.00008}) // TODO TUNE GAINS 0.000075
+    // .withMaxVelocity(0.5)
     .build();
 
 void createBlankBackground(){
