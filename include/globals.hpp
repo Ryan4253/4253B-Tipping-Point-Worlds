@@ -59,6 +59,8 @@ extern std::shared_ptr<AsyncMotionProfiler> turnProfiler;
 extern std::shared_ptr<AsyncPositionController<double, double>> liftController;
 extern std::shared_ptr<AsyncPositionController<double, double>> topBranchController;
 
+extern std::shared_ptr<IterativePosPIDController> turnPID;
+
 /**
  * @brief Create a Blank Background using LVGL
  * 

@@ -35,7 +35,7 @@ Pneumatics leftNeedle('H');
 Pneumatics rightNeedle('G'); 
 
 // MOTION PROFILE CONSTANTS
-ProfileConstraint moveLimit({4.8_ftps, 17.5_ftps2, 17.5_ftps2, 25_ftps3}); // TODO TUNE GAINS
+ProfileConstraint moveLimit({3_ftps, 6_ftps2, 6_ftps2, 25_ftps3}); // TODO TUNE GAINS
 ProfileConstraint turnLimit({4.8_ftps, 17.5_ftps2, 17.5_ftps2, 25_ftps3}); // TODO TUNE GAINS
 FFVelocityController leftController(0.187, 0.04, 0.025, 2.5, 0); // TODO TUNE GAINS
 FFVelocityController rightController(0.187, 0.04, 0.025, 2.5, 0); // TODO TUNE GAINS
@@ -67,11 +67,13 @@ std::shared_ptr<AsyncPositionController<double, double>> liftController = AsyncP
 std::shared_ptr<AsyncPositionController<double, double>> topBranchController = AsyncPosControllerBuilder()
     .withMotor(topBranch)
     // .withGearset({AbstractMotor::gearset::red, 3.0/1.0})
-    .withMaxVelocity(50)
+    .withMaxVelocity(0.5)
     // .withSensor(std::make_shared<RotationSensor>(topBranchSensor))
-    .withGains({0.0069, 0.0, 0.00008}) // TODO TUNE GAINS 0.000075
+    .withGains({0.00685, 0.0, 0.000082}) // TODO TUNE GAINS 0.000075
     // .withMaxVelocity(0.5)
     .build();
+
+std::shared_ptr<IterativePosPIDController> turnPID = std::make_shared<IterativePosPIDController>(0.037, 0.0, 0.00065, 0, TimeUtilFactory::withSettledUtilParams(2, 2, 100_ms)); // #TODO - Tune Constant
 
 void createBlankBackground(){
     lv_obj_t *background;
