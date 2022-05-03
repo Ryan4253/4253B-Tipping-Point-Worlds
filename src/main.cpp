@@ -33,14 +33,11 @@ void opcontrol(){
 	leftDrive.setBrakeMode(AbstractMotor::brakeMode::coast);
 	rightDrive.setBrakeMode(AbstractMotor::brakeMode::coast);
     lift.setBrakeMode(AbstractMotor::brakeMode::hold);
-
-    // profiler->setTarget(2_ft, true);
-    // turnToAngle(90_deg);
+    topBranch.setBrakeMode(AbstractMotor::brakeMode::hold);
 
 	// initializes subsystems
 	auto model = std::static_pointer_cast<ExpandedSkidSteerModel>(chassis->getModel());
-	// liftController->flipDisable(true);
-	// topBranchController->flipDisable(true);
+    // liftController->flipDisable(true);
 
 	// initializes constants
 	bool rollerState = false;
@@ -51,15 +48,36 @@ void opcontrol(){
 
     auto swingerState = ControllerDigital::down;
     
-    topBranchController->setTarget(-260);
-    backClamp.set(true);
-    pros::delay(500);
-    liftController->setTarget(750);
+    // topBranchController->setTarget(-260);
+    // backClamp.set(true);
+    // pros::delay(500);
+    // liftController->setTarget(750);
+    topBranchController->setTarget(TopBranchPosition::REST);
 
 	while(true){
         if(master[ControllerDigital::A].changedToPressed()) turnToAngle(0_deg);
 
 		model->curvature(master.getAnalog(ControllerAnalog::leftY), master.getAnalog(ControllerAnalog::rightX), 0.05);
+
+        /** PID Lift Control */
+        if(partner[ControllerDigital::up].changedToPressed()) {
+            liftController->setTarget(LiftPosition::TOPBRANCH);
+        } else if(partner[ControllerDigital::left].changedToPressed()) {
+            liftController->setTarget(LiftPosition::LOADINGHEIGHT);
+        } else if(partner[ControllerDigital::right].changedToPressed()) {
+            liftController->setTarget(LiftPosition::LOWBRANCH);
+        } else if(partner[ControllerDigital::down].changedToPressed()) {
+            liftController->setTarget(LiftPosition::MINHEIGHT);
+        }
+
+        /** PID TopBranch Control */
+        if(partner[ControllerDigital::X].changedToPressed()) {
+            topBranchController->setTarget(TopBranchPosition::TOPBRANCH);
+        } else if(partner[ControllerDigital::Y].changedToPressed()) {
+            topBranchController->setTarget(TopBranchPosition::LOADINGHEIGHT);
+        } else if(partner[ControllerDigital::B].changedToPressed()) {
+            topBranchController->setTarget(TopBranchPosition::REST);
+        }
 
 		/**
          * @brief lift control using an async PID controller
@@ -68,12 +86,7 @@ void opcontrol(){
          *        note: target angle is capped to [0, MAX_LIFT_HEIGHT] to protect the lift
          */
 		// lift.moveVelocity(200*(master.getDigital(ControllerDigital::L1) - master.getDigital(ControllerDigital::L2)));
-        if(master.getDigital(ControllerDigital::L1)) {
-            liftController->setTarget(750);
-        } else if(master.getDigital(ControllerDigital::L2)) {
-            liftController->setTarget(250);
-        } 
-
+        
         /**
          * @brief Manual swinger control
          *        UP pressed: moves up
