@@ -3,7 +3,7 @@ using namespace ryan;
 
 // CONTROLLERS
 Controller master(ControllerId::master);
-Controller parter(ControllerId::partner);
+Controller partner(ControllerId::partner);
 
 // MOTORS
 Motor leftFront(3, true, AbstractMotor::gearset::green, AbstractMotor::encoderUnits::degrees); 

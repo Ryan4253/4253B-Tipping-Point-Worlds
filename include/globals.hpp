@@ -9,16 +9,18 @@ const double DEADBAND = 0.0500;
 
 namespace LiftPosition{
     const int MINHEIGHT = 0;
+    const int LOADINGHEIGHT = 220;
     const int LOWBRANCH = 0; // TODO TUNE READING
-    const int TOPBRANCH = 0; // TODO TUNE READING
+    const int TOPBRANCH = 750; 
     const int MAXHEIGHT = 750;
 };
 
 namespace TopBranchPosition{
-    const int REST = 0; // TODO TUNE READING
-    const int LOADING = 0; // TODO TUNE READING
+    const int STOWED = 0; 
+    const int REST = -160;
+    const int LOADINGHEIGHT = -825; 
     const int LOWBRANCH = 0; // TODO TUNE READING
-    const int TOPBRANCH = 0; // TODO TUNE READING   
+    const int TOPBRANCH = -250; 
 }
 // CONTROLLER
 extern Controller master;
