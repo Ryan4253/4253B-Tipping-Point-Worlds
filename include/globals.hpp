@@ -35,6 +35,7 @@ extern Motor roller;
 extern RotationSensor left;
 extern RotationSensor right;
 extern RotationSensor mid;
+extern RotationSensor topBranchSensor;
 extern IMU imu; 
 extern pros::Vision vision;
 
@@ -57,6 +58,8 @@ extern std::shared_ptr<AsyncMotionProfiler> profiler;
 extern std::shared_ptr<AsyncMotionProfiler> turnProfiler;
 extern std::shared_ptr<AsyncPositionController<double, double>> liftController;
 extern std::shared_ptr<AsyncPositionController<double, double>> topBranchController;
+
+extern std::shared_ptr<IterativePosPIDController> turnPID;
 
 /**
  * @brief Create a Blank Background using LVGL

@@ -23,18 +23,19 @@ MotorGroup lift({liftTop, liftBottom});
 RotationSensor left(1, true); // todo check port
 RotationSensor right(18); 
 RotationSensor mid(9);
+RotationSensor topBranchSensor(14, true);
 IMU imu(8);
 pros::Vision vision(16); 
 
 // PNEUMATICS
 Pneumatics clamp('F'); 
 Pneumatics backClamp('C'); 
-Pneumatics tilter('E', true); 
+Pneumatics tilter('E'); 
 Pneumatics leftNeedle('H'); 
 Pneumatics rightNeedle('G'); 
 
 // MOTION PROFILE CONSTANTS
-ProfileConstraint moveLimit({4.8_ftps, 17.5_ftps2, 17.5_ftps2, 25_ftps3}); // TODO TUNE GAINS
+ProfileConstraint moveLimit({3_ftps, 6_ftps2, 6_ftps2, 25_ftps3}); // TODO TUNE GAINS
 ProfileConstraint turnLimit({4.8_ftps, 17.5_ftps2, 17.5_ftps2, 25_ftps3}); // TODO TUNE GAINS
 FFVelocityController leftController(0.187, 0.04, 0.025, 2.5, 0); // TODO TUNE GAINS
 FFVelocityController rightController(0.187, 0.04, 0.025, 2.5, 0); // TODO TUNE GAINS
@@ -59,13 +60,20 @@ std::shared_ptr<AsyncMotionProfiler> turnProfiler = AsyncMotionProfilerBuilder()
 
 std::shared_ptr<AsyncPositionController<double, double>> liftController = AsyncPosControllerBuilder()
     .withMotor(lift)
+    // .withGearset({AbstractMotor::gearset::green, 7.0/1.0})
     .withGains({0.007, 0.0, 0.000075}) // TODO TUNE GAINS
     .build();
 
 std::shared_ptr<AsyncPositionController<double, double>> topBranchController = AsyncPosControllerBuilder()
     .withMotor(topBranch)
-    .withGains({0.007, 0.0, 0.000075}) // TODO TUNE GAINS
+    // .withGearset({AbstractMotor::gearset::red, 3.0/1.0})
+    .withMaxVelocity(0.5)
+    // .withSensor(std::make_shared<RotationSensor>(topBranchSensor))
+    .withGains({0.00685, 0.0, 0.000082}) // TODO TUNE GAINS 0.000075
+    // .withMaxVelocity(0.5)
     .build();
+
+std::shared_ptr<IterativePosPIDController> turnPID = std::make_shared<IterativePosPIDController>(0.037, 0.0, 0.00065, 0, TimeUtilFactory::withSettledUtilParams(2, 2, 100_ms)); // #TODO - Tune Constant
 
 void createBlankBackground(){
     lv_obj_t *background;

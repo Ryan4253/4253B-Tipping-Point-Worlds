@@ -80,6 +80,8 @@ void opcontrol(void);
 #include "gif-pros/gifclass.hpp"
 #include "display/lvgl.h"
 #include "globals.hpp"
+#include "TallBranchStateMachine.hpp"
+#include "Drive.hpp"
 #endif
 
 #endif  // _PROS_MAIN_H_
