@@ -6,7 +6,7 @@ void initialize() {
 
 	// Vision initialization
     auto RED_SIG = pros::Vision::signature_from_utility(1, 5685, 8135, 6910, -1963, -1705, -1834, 4.000, 0);
-    vision.set_signature(1, &RED_SIG);
+    vision.set_signature(1, &RED_SIG); 
 
 	// imu initialization
 	pros::lcd::set_text(2, "imu calibrating..............");
@@ -61,11 +61,11 @@ void opcontrol(){
 
         /** PID Lift Control */
         if(partner[ControllerDigital::up].changedToPressed()) {
-            liftController->setTarget(LiftPosition::TOPBRANCH);
+            liftController->setTarget(LiftPosition::MAXHEIGHT);
         } else if(partner[ControllerDigital::left].changedToPressed()) {
             liftController->setTarget(LiftPosition::LOADINGHEIGHT);
         } else if(partner[ControllerDigital::right].changedToPressed()) {
-            liftController->setTarget(LiftPosition::LOWBRANCH);
+            liftController->setTarget(LiftPosition::TOPBRANCH);
         } else if(partner[ControllerDigital::down].changedToPressed()) {
             liftController->setTarget(LiftPosition::MINHEIGHT);
         }
