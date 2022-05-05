@@ -35,7 +35,7 @@ Pneumatics leftNeedle('H');
 Pneumatics rightNeedle('G'); 
 
 // MOTION PROFILE CONSTANTS
-ProfileConstraint moveLimit({3_ftps, 6_ftps2, 6_ftps2, 25_ftps3}); // TODO TUNE GAINS
+ProfileConstraint moveLimit({3_ftps, 5_ftps2, 5_ftps2, 25_ftps3}); // TODO TUNE GAINS
 ProfileConstraint turnLimit({4.8_ftps, 17.5_ftps2, 17.5_ftps2, 25_ftps3}); // TODO TUNE GAINS
 FFVelocityController leftController(0.187, 0.04, 0.025, 2.5, 0); // TODO TUNE GAINS
 FFVelocityController rightController(0.187, 0.04, 0.025, 2.5, 0); // TODO TUNE GAINS
@@ -74,6 +74,7 @@ std::shared_ptr<AsyncPositionController<double, double>> topBranchController = A
     .build();
 
 std::shared_ptr<IterativePosPIDController> turnPID = std::make_shared<IterativePosPIDController>(0.037, 0.0, 0.00065, 0, TimeUtilFactory::withSettledUtilParams(2, 2, 100_ms)); // #TODO - Tune Constant
+std::shared_ptr<IterativePosPIDController> agroTurnPID = std::make_shared<IterativePosPIDController>(0.038, 0.00001, 0.00065, 0, TimeUtilFactory::withSettledUtilParams(2, 2, 100_ms)); // #TODO - Tune Constant
 
 void createBlankBackground(){
     lv_obj_t *background;
