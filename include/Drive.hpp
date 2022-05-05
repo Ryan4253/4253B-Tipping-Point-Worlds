@@ -7,4 +7,4 @@
 28 * @param targetAngle - the target odometry global angle to turn to, normalized to [-pi,
 ,→ pi]
 29 */
-void turnToAngle(okapi::QAngle targetAngle);
+void turnToAngle(okapi::QAngle targetAngle, bool agro = false);
