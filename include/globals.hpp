@@ -9,7 +9,7 @@ const double DEADBAND = 0.0500;
 
 namespace LiftPosition{
     const int MINHEIGHT = 0;
-    const int LOADINGHEIGHT = 230;
+    const int LOADINGHEIGHT = 255;
     const int LOWBRANCH = 0; // TODO TUNE READING
     const int TOPBRANCH = 555; 
     const int MAXHEIGHT = 755;

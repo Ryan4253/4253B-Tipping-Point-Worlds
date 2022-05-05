@@ -74,7 +74,7 @@ std::shared_ptr<AsyncPositionController<double, double>> topBranchController = A
     .build();
 
 std::shared_ptr<IterativePosPIDController> turnPID = std::make_shared<IterativePosPIDController>(0.037, 0.0, 0.00065, 0, TimeUtilFactory::withSettledUtilParams(2, 2, 100_ms)); // #TODO - Tune Constant
-std::shared_ptr<IterativePosPIDController> agroTurnPID = std::make_shared<IterativePosPIDController>(0.038, 0.00001, 0.00065, 0, TimeUtilFactory::withSettledUtilParams(2, 2, 100_ms)); // #TODO - Tune Constant
+std::shared_ptr<IterativePosPIDController> agroTurnPID = std::make_shared<IterativePosPIDController>(0.04, 0.00002, 0.00065, 0, TimeUtilFactory::withSettledUtilParams(2, 2, 100_ms)); // #TODO - Tune Constant
 
 void createBlankBackground(){
     lv_obj_t *background;
