@@ -71,10 +71,11 @@ std::shared_ptr<AsyncPositionController<double, double>> topBranchController = A
     // .withSensor(std::make_shared<RotationSensor>(topBranchSensor))
     .withGains({0.00685, 0.0, 0.000082}) // TODO TUNE GAINS 0.000075
     // .withMaxVelocity(0.5)
+    // .withTimeUtilFactory(TimeUtilFactory::withSettledUtilParams(2, 2, 100_ms))
     .build();
 
 std::shared_ptr<IterativePosPIDController> turnPID = std::make_shared<IterativePosPIDController>(0.037, 0.0, 0.00065, 0, TimeUtilFactory::withSettledUtilParams(2, 2, 100_ms)); // #TODO - Tune Constant
-std::shared_ptr<IterativePosPIDController> agroTurnPID = std::make_shared<IterativePosPIDController>(0.05, 0.00025, 0.00065, 0, TimeUtilFactory::withSettledUtilParams(2, 2, 100_ms)); // #TODO - Tune Constant
+std::shared_ptr<IterativePosPIDController> agroTurnPID = std::make_shared<IterativePosPIDController>(0.05, 0.0003, 0.00065, 0, TimeUtilFactory::withSettledUtilParams(2, 2, 100_ms)); // #TODO - Tune Constant
 
 void createBlankBackground(){
     lv_obj_t *background;
