@@ -780,6 +780,8 @@ Trajectory mogus = {
     };
 
 
+
+
 void initialize() {
 	// LCD initialization
 	pros::lcd::initialize();
