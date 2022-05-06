@@ -855,6 +855,8 @@ void autonomous() {
     
     profiler->setTarget(-1_ft, true);
 
+    /** --------- */
+    /*
     liftController->setTarget(0);
     turnToAngle(330_deg);
     tilter.set(false); backClamp.set(false);
@@ -867,7 +869,8 @@ void autonomous() {
     leftDrive.moveVoltage(-12000); rightDrive.moveVoltage(-12000);
     // pros::delay(2000);
     // leftDrive.moveVoltage(0); rightDrive.moveVoltage(0);
-    
+    */
+
     while(true){pros::delay(10);}
 
     TallBranchAuton:
