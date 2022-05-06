@@ -845,6 +845,7 @@ void autonomous() {
     profiler->waitUntilSettled();
     clamp.set(false);
     
+    /*
     // profiler->setTarget(mogus);
     liftController->setTarget(LiftPosition::MAXHEIGHT); //todo !!!!
     // profiler->waitUntilSettled();
@@ -854,6 +855,7 @@ void autonomous() {
     clamp.set(true);
     
     profiler->setTarget(-1_ft, true);
+    */
 
     /** --------- */
     /*
