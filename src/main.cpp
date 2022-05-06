@@ -817,7 +817,7 @@ void autonomous() {
     liftController->setTarget(0);
     clamp.set(true);
 
-    goto SimpleAuton;
+    goto TallBranchAuton;
 
     SimpleAuton:
 
@@ -839,13 +839,16 @@ void autonomous() {
     clamp.set(false);
     
     // profiler->setTarget(mogus);
-    liftController->setTarget(LiftPosition::MAXHEIGHT);
+    liftController->setTarget(LiftPosition::MAXHEIGHT); //todo !!!!
     // profiler->waitUntilSettled();
-    turnToAngle(99_deg, true);
+    turnToAngle(108_deg, true);
     profiler->setTarget(5.25_ft, true);
+    leftDrive.moveVoltage(-12000); rightDrive.moveVoltage(12000); pros::delay(350);leftDrive.moveVoltage(0); rightDrive.moveVoltage(0);
     clamp.set(true);
     
     profiler->setTarget(-1_ft, true);
+
+    /*
     liftController->setTarget(0);
     turnToAngle(330_deg);
     tilter.set(false); backClamp.set(false);
@@ -858,6 +861,7 @@ void autonomous() {
     leftDrive.moveVoltage(-12000);
     rightDrive.moveVoltage(-12000);
     pros::delay(2000);
+    */
     
     while(true){pros::delay(10);}
 
