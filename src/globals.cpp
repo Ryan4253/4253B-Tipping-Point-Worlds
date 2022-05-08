@@ -1,4 +1,4 @@
-#include "main.h"
+#include "Globals.hpp"
 using namespace ryan;
 
 // CONTROLLERS
@@ -20,10 +20,6 @@ MotorGroup rightDrive({rightFront, rightBack});
 MotorGroup lift({liftTop, liftBottom});
 
 // SENSORS
-RotationSensor left(1, true); // todo check port
-RotationSensor right(18); 
-RotationSensor mid(9);
-RotationSensor topBranchSensor(14, true);
 IMU imu(8);
 pros::Vision vision(16); 
 
@@ -35,47 +31,32 @@ Pneumatics leftNeedle('H');
 Pneumatics rightNeedle('G'); 
 
 // MOTION PROFILE CONSTANTS
-ProfileConstraint moveLimit({3_ftps, 5_ftps2, 5_ftps2, 25_ftps3}); // TODO TUNE GAINS
-ProfileConstraint turnLimit({4.8_ftps, 17.5_ftps2, 17.5_ftps2, 25_ftps3}); // TODO TUNE GAINS
-FFVelocityController leftController(0.187, 0.04, 0.025, 2.5, 0); // TODO TUNE GAINS
-FFVelocityController rightController(0.187, 0.04, 0.025, 2.5, 0); // TODO TUNE GAINS
+ProfileConstraint moveLimit({3_ftps, 5_ftps2, 5_ftps2, 25_ftps3});
+ProfileConstraint turnLimit({4.8_ftps, 17.5_ftps2, 17.5_ftps2, 25_ftps3});
 
 // SUBSYSTEM CONTROLLERS
-std::shared_ptr<OdomChassisController> chassis = ChassisControllerBuilder()
+std::shared_ptr<ChassisController> chassis = ChassisControllerBuilder()
     .withMotors(leftDrive, rightDrive)
-    .withDimensions({AbstractMotor::gearset::green, 5.0/7.0}, {{3.25_in, 1.294_ft}, imev5BlueTPR}) // TODO CALCULATE CORRECT TRACK WIDTH
-    .withSensors(left, right, mid)
-    .withOdometry({{2.75_in, 7_in, 2_in, 2.75_in}, 360}, StateMode::CARTESIAN) // TODO CALCULATE CORRECT TRACK WIDTH
-    .buildOdometry();
+    .withDimensions({AbstractMotor::gearset::green, 5.0/7.0}, {{3.25_in, 1.294_ft}, imev5BlueTPR})
+    .build();
 
 std::shared_ptr<AsyncMotionProfiler> profiler = AsyncMotionProfilerBuilder()
     .withOutput(chassis)
     .withProfiler(std::make_unique<SCurveMotionProfile>(moveLimit))
     .build();
 
-std::shared_ptr<AsyncMotionProfiler> turnProfiler = AsyncMotionProfilerBuilder()
-    .withOutput(chassis)
-    .withProfiler(std::make_unique<SCurveMotionProfile>(turnLimit))
-    .build();
-
 std::shared_ptr<AsyncPositionController<double, double>> liftController = AsyncPosControllerBuilder()
     .withMotor(lift)
-    // .withGearset({AbstractMotor::gearset::green, 7.0/1.0})
-    .withGains({0.007, 0.0, 0.000075}) // TODO TUNE GAINS
+    .withGains({0.007, 0.0, 0.000075})
     .build();
 
 std::shared_ptr<AsyncPositionController<double, double>> topBranchController = AsyncPosControllerBuilder()
     .withMotor(topBranch)
-    // .withGearset({AbstractMotor::gearset::red, 3.0/1.0})
     .withMaxVelocity(0.5)
-    // .withSensor(std::make_shared<RotationSensor>(topBranchSensor))
-    .withGains({0.00685, 0.0, 0.000082}) // TODO TUNE GAINS 0.000075
-    // .withMaxVelocity(0.5)
-    // .withTimeUtilFactory(TimeUtilFactory::withSettledUtilParams(2, 2, 100_ms))
+    .withGains({0.00685, 0.0, 0.000082})
     .build();
 
-std::shared_ptr<IterativePosPIDController> turnPID = std::make_shared<IterativePosPIDController>(0.037, 0.0, 0.00065, 0, TimeUtilFactory::withSettledUtilParams(2, 2, 100_ms)); // #TODO - Tune Constant
-std::shared_ptr<IterativePosPIDController> agroTurnPID = std::make_shared<IterativePosPIDController>(0.05, 0.0003, 0.00065, 0, TimeUtilFactory::withSettledUtilParams(2, 2, 100_ms)); // #TODO - Tune Constant
+std::shared_ptr<IterativePosPIDController> turnPID = std::make_shared<IterativePosPIDController>(0.037, 0.0, 0.00065, 0, TimeUtilFactory::withSettledUtilParams(2, 2, 100_ms));
 
 void createBlankBackground(){
     lv_obj_t *background;

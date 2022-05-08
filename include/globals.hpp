@@ -22,6 +22,7 @@ namespace TopBranchPosition{
     const int LOWBRANCH = 0; // TODO TUNE READING
     const int TOPBRANCH = -263; 
 }
+
 // CONTROLLER
 extern Controller master;
 extern Controller partner;
@@ -34,10 +35,6 @@ extern Motor topBranch;
 extern Motor roller;
 
 // SENSORS
-extern RotationSensor left;
-extern RotationSensor right;
-extern RotationSensor mid;
-extern RotationSensor topBranchSensor;
 extern IMU imu; 
 extern pros::Vision vision;
 
@@ -51,18 +48,13 @@ extern Pneumatics rightNeedle;
 // MOTION PROFILE CONSTANTS
 extern ProfileConstraint moveLimit;
 extern ProfileConstraint turnLimit;
-extern FFVelocityController leftController;
-extern FFVelocityController rightController;
 
 // SUBSYSTEM CONTROLLERS
-extern std::shared_ptr<OdomChassisController> chassis;
+extern std::shared_ptr<ChassisController> chassis;
 extern std::shared_ptr<AsyncMotionProfiler> profiler;
-extern std::shared_ptr<AsyncMotionProfiler> turnProfiler;
 extern std::shared_ptr<AsyncPositionController<double, double>> liftController;
 extern std::shared_ptr<AsyncPositionController<double, double>> topBranchController;
-
 extern std::shared_ptr<IterativePosPIDController> turnPID;
-extern std::shared_ptr<IterativePosPIDController> agroTurnPID;
 
 /**
  * @brief Create a Blank Background using LVGL

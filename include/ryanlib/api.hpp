@@ -13,5 +13,4 @@ using namespace ryan;
 #include "ryanlib/LinearMotionProfile.hpp"
 #include "ryanlib/AsyncProfiler.hpp"
 #include "ryanlib/ExpandedSkidSteerModel.hpp"
-#include "ryanlib/Odometry.hpp" // TODO IMPLEMENT IMU ODOM
-#include "ryanlib/AutonSelector.hpp" // TODO IMPLEMENT FILE BASED AUTON SELECTOR
+#include "ryanlib/AutonSelector.hpp"

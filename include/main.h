@@ -79,9 +79,10 @@ void opcontrol(void);
 #include "ryanlib/api.hpp"
 #include "gif-pros/gifclass.hpp"
 #include "display/lvgl.h"
-#include "globals.hpp"
-#include "TallBranchStateMachine.hpp"
+#include "Globals.hpp"
 #include "Drive.hpp"
+#include "Path.hpp"
+#include "Auton.hpp"
 #endif
 
 #endif  // _PROS_MAIN_H_
