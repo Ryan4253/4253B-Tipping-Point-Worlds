@@ -35,7 +35,7 @@ auto profiler = AsyncMotionProfilerBuilder()
 
 ## Future Plans
 Our team is made up of 4 juniors and 1 sophomore. However, we are not sure if we will continue competing next year. I will most likely just move onto mentoring younger teams and developing my code instead. Most of the reusable code written this year will be incorporated into [lib4253](https://github.com/Ryan4253/lib4253/tree/develop
-), another programming library I've been developing  since around February last year. It includes powerful features such as pure pursuit, ramsete (and hopefully custom trajectory generation too), and I plan on finishing the code around summer / early next season and release it to the public.
+), another programming library I've been developing  since around February last year. It includes powerful features such as pure pursuit, RAMSETE (and hopefully custom trajectory generation too), and I plan on finishing the code around summer / early Spin Up and releasing it to the public.
 
 ## Past season code if anyone is interested in seeing how we improved
 Change Up Early Season: https://github.com/Yessir120/Change-Up <br>
