@@ -1,4 +1,4 @@
 #pragma once
 #include "main.h"
 
-Trajectory curveToTallMogo;
+extern Trajectory curveToTallMogo;

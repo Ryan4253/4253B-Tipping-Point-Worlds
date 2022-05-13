@@ -40,6 +40,11 @@ class Pneumatics {
      */
     void set(bool iState);
 
+    /**
+     * @brief Get the State of the cylinder
+     * 
+     * @return whether the piston is extended 
+     */
     bool getState() const;
 };
 

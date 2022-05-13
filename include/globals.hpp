@@ -48,6 +48,8 @@ extern Pneumatics rightNeedle;
 // MOTION PROFILE CONSTANTS
 extern ProfileConstraint moveLimit;
 extern ProfileConstraint turnLimit;
+extern FFVelocityController leftController;
+extern FFVelocityController rightController;
 
 // SUBSYSTEM CONTROLLERS
 extern std::shared_ptr<ChassisController> chassis;

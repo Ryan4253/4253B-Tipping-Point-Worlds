@@ -33,6 +33,8 @@ Pneumatics rightNeedle('G');
 // MOTION PROFILE CONSTANTS
 ProfileConstraint moveLimit({3_ftps, 5_ftps2, 5_ftps2, 25_ftps3});
 ProfileConstraint turnLimit({4.8_ftps, 17.5_ftps2, 17.5_ftps2, 25_ftps3});
+FFVelocityController leftController(0.187, 0.04, 0.025, 4.35, 0.1); // TODO Tune for new chassis
+FFVelocityController rightController(0.1915, 0.043, 0.02, 4, 0.1); // TODO Tune for new chassis
 
 // SUBSYSTEM CONTROLLERS
 std::shared_ptr<ChassisController> chassis = ChassisControllerBuilder()

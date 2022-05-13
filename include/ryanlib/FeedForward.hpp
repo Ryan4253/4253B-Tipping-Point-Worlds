@@ -4,7 +4,8 @@
 namespace ryan{
 
 /**
- * @brief Our custom feedforward velocity controller class - used for motion profiles
+ * @brief Our custom feedforward velocity controller class, can be used when target velocity and acceleration are known
+ *        For example, this can be used in following motion profiles, as well as in pure pursuit
  * 
  */
 class FFVelocityController{

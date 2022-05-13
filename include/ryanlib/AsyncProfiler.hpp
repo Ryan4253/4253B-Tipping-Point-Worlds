@@ -19,10 +19,6 @@ enum class MotionProfileState{
     MOVE, FOLLOW, IDLE
 };
 
-enum class TurnType{
-    GLOBAL, LOCAL
-};
-
 // forward declare
 template class StateMachine<MotionProfileState>;
 
@@ -104,15 +100,6 @@ class AsyncMotionProfiler : public StateMachine<MotionProfileState, MotionProfil
      * @param waitUntilSettled whether or not to wait until the motion profile is settled
      */ 
     void setTarget(const Trajectory& iPath, bool waitUntilSettled = false);
-
-     /**
-     * @brief Set the Target angle to turn
-     * 
-     * @param iPath target angle to turn
-     * @param iType whether to do a global or local turn
-     * @param waitUntilSettled whether or not to wait until the motion profile is settled
-     */ 
-    void setTarget(okapi::QAngle iAngle, TurnType iType = TurnType::GLOBAL, bool waitUntilSettled = false);
 
     /**
      * @brief stop the chassis from moving

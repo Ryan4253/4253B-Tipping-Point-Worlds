@@ -68,7 +68,6 @@ void opcontrol(){
 
         /**
          * @brief PID Lift Control
-         * 
          */
         if(partner[ControllerDigital::up].changedToPressed()){
             liftController->setTarget(LiftPosition::MAXHEIGHT);
@@ -85,7 +84,6 @@ void opcontrol(){
 
         /**
          * @brief PID Top Branch Control
-         * 
          */
         if(partner[ControllerDigital::X].changedToPressed()){
             topBranchController->setTarget(TopBranchPosition::TOPBRANCH);
